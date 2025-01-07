@@ -211,7 +211,7 @@ void compress(const char* inputFilePath) {
 
 
 /**
- * @brief Decompress a file(*.huff) compressed with the Huffman coding algorithm.
+ * @brief Decompress a file(*.huff) compressed with the Huffman coding algorithm. outout file's format is '*.orig'.
  * 
  * 1. **FILE READING**:
  *    - Opens the input `.huff` file in binary mode.
@@ -225,7 +225,7 @@ void compress(const char* inputFilePath) {
  * 
  * 4.  **DATA DECOMPRESSION**
  *    - load the compressed data to the memory buffer, do Decompressing.
- *    - write decoded binary data to the output file
+ *    - write decoded binary data to the output file(*.orig)
  * 
  * 5. **Resource Cleanup**:
  *    - Frees allocated memory and closes all file streams.
@@ -268,7 +268,8 @@ void decompress(const char* inputFilePath) {
 
     char* extension = strrchr(outputFilePath, '.');
     if (extension && strcmp(extension, ".huff") == 0) {
-        *extension = '\0';
+        *extension = '\0'; 
+        strncat(outputFilePath, ".orig", sizeof(outputFilePath) - strlen(outputFilePath) - 1); // add .orig 
     } else {
         fclose(inputFile);
         THROW_EXCEPTION_AND_EXIT(EXCEPTION_INVALID_INPUT, 

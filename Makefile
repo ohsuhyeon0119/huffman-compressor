@@ -22,8 +22,8 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(MAIN_TARGET)
-	./$(MAIN_TARGET)
+	./$(MAIN_TARGET) $(args)
 
 clean:
-	rm -rf $(BIN_DIR)   
+	rm -rf $(BIN_DIR)
 	rm -f $(SRC_DIR)/*.o
