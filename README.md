@@ -4,7 +4,7 @@ Implementation of file compression and decompression using the Huffman algorithm
 
 Each byte value (ASCII code) corresponds to a single character and is converted into a variable-length codeword by the Huffman algorithm. The *.huff file is a compressed file format.
 
-
+This algorithm Implementation does not achieve significant compression efficiency on data that is already in a compressed format. It is more suitable for files where frequency differences are meaningful, such as text files. For example, on a test.txt file generated with Lorem Ipsum text, it shows approximately 50% compression efficiency.
 
 
 ## Usage
@@ -82,7 +82,7 @@ Decompress a file (`*.huff`) compressed with the Huffman coding algorithm. The o
    - Reads the metadata header to retrieve the original file size and Huffman tree structure.
 
 2. **Huffman Tree Reconstruction**:
-   - Rebuilds a Huffman tree (Trie structure) from the metadata contained in the header.
+   - Rebuilds a Huffman tree (`Trie` structure) from the metadata contained in the header.
 
 3. **Output File Initialization**:
    - Generates a new output file with the original file name (excluding the `.huff` extension).
@@ -146,3 +146,5 @@ It splits the file into manageable parts, providing seamless byte-by-byte access
 `On-Demand Loading` - Automatically fetches the required chunk if the requested byte is outside the current buffer range. 
 
 `Seamless Access` - Handles file splitting internally, so users can access data continuously without worrying about chunk boundaries.
+
+

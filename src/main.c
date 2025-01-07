@@ -210,10 +210,19 @@ void compress(const char* inputFilePath) {
     fclose(inputFile);
     fclose(outputFile);
 
+
+    FILE* compressedFile = fopen(outputFilePath, "rb");
+    fseek(compressedFile, 0, SEEK_END);
+    long compressed_size = ftell(compressedFile);
+    fclose(compressedFile);
+    double compression_ratio = 1.0 - ((double)compressed_size / (double)filesize);
+
     end_time = clock();
     elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-    printf("Compression completed in %.2f seconds. Output written to '%s'.\n", elapsed_time,outputFilePath);
+    printf("Compression completed in %.2f seconds. Output written to '%s'.\n", elapsed_time, outputFilePath);
+    printf("Compression ratio: %.2f%%\n", compression_ratio * 100.0);
 }
+
 
 
 /**
