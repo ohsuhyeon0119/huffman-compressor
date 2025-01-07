@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <libgen.h> 
+#include <time.h>
 #include "Huffman_tree_util.h"
 #include "Huffman_node.h"
 #include "Priority_queue.h"
@@ -65,6 +66,9 @@ int main(int argc, char* argv[]) {
  */
 void compress(const char* inputFilePath) {
     printf("Running compression...\n");
+    clock_t start_time, end_time;
+    start_time = clock();
+    double elapsed_time;
 
     // ===== FILE READING =====    
     FILE* inputFile = fopen(inputFilePath, "rb");
@@ -206,7 +210,9 @@ void compress(const char* inputFilePath) {
     fclose(inputFile);
     fclose(outputFile);
 
-    printf("Compression completed. Output written to '%s'.\n", outputFilePath);
+    end_time = clock();
+    elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    printf("Compression completed in %.2f seconds. Output written to '%s'.\n", elapsed_time,outputFilePath);
 }
 
 
@@ -232,6 +238,9 @@ void compress(const char* inputFilePath) {
  */
 void decompress(const char* inputFilePath) {
     printf("Running decompression...\n");
+    clock_t start_time, end_time;
+    start_time = clock();
+    double elapsed_time;
 
     // ===== FILE READING =====
     FILE* inputFile = fopen(inputFilePath, "rb");
@@ -338,5 +347,7 @@ void decompress(const char* inputFilePath) {
     fclose(inputFile);
     fclose(outputFile);
 
-    printf("Decompression completed. Output written to '%s'.\n", outputFilePath);
+     end_time = clock();
+    elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    printf("Decompression completed in %.2f seconds. Output written to '%s'.\n", elapsed_time,outputFilePath);
 }
