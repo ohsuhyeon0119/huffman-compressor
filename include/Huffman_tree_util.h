@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Huffman_node.h"
-#include "PriorityQueue.h"
+#include "Priority_queue.h"
 #include "Byte_table.h"
 
 Huffman_node* Huffman_tree_generate(PriorityQueue* pq) ;

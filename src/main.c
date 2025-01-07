@@ -4,7 +4,7 @@
 #include <libgen.h> 
 #include "Huffman_tree_util.h"
 #include "Huffman_node.h"
-#include "PriorityQueue.h"
+#include "Priority_queue.h"
 #include "Byte_table.h"
 #include "Huffman_header.h"
 #include "Trie.h"

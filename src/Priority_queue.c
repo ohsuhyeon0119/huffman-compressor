@@ -1,4 +1,4 @@
-#include "PriorityQueue.h"
+#include "Priority_queue.h"
 
 PriorityQueue* Pq_create(int capacity){
     PriorityQueue* pq=  (PriorityQueue*) malloc(sizeof(PriorityQueue));
