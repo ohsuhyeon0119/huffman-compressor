@@ -136,15 +136,4 @@ The compressed data contains the Huffman-encoded representation of the original 
 
 
 
-## About `Stream_buffer struct`
-In the decompress function, directly loading the entire compressed file into memory can be problematic if the compressed file size is too large. To address this issue, I created a struct called `Stream_buffer`.
-
-The `Stream_buffer` is useful for efficiently loading large compressed files, avoiding memory issues by reading the file in smaller chunks instead of loading it entirely into memory. 
-
-It splits the file into manageable parts, providing seamless byte-by-byte access while maintaining a fixed-size memory footprint.
-
-`On-Demand Loading` - Automatically fetches the required chunk if the requested byte is outside the current buffer range. 
-
-`Seamless Access` - Handles file splitting internally, so users can access data continuously without worrying about chunk boundaries.
-
 
