@@ -89,3 +89,49 @@ Decompress a file (`*.huff`) compressed with the Huffman coding algorithm. The o
    - Loads the compressed data into a memory buffer for decompression.
    - Writes the decoded binary data to the output file (`*.orig`).
 
+## About `*.huff` file structure
+The `*.huff` file consists of **Metadata Header**, **Section Divider**, and **Compressed Data**. The details of each component are explained below.
+
+|Section|byte size|content|
+|---------------|---------------|---------------|
+| **Metadata Header**   | 20 bytes + Metadata (N) | File metadata and Huffman codewords mapping table |
+| **Section Divider**   | 2 bytes                | Fixed (0x00 0x00)               |
+| **Compressed Data**   | Variable               | Huffman-compressed file content |
+
+
+**1. Metadata Header**
+
+The metadata header stores information about the compressed file. It contains both fixed and variable-length fields, including the data required to reconstruct the Huffman tree and decode the compressed data.
+
+
+
+
+
+| Field     | Size (Bytes)     | Description     |
+|---------------|---------------|---------------|
+| magic_number| 4| File identifier 0x46465548(FFUH) |
+| header_size| 4 | Total size of the header (including the codeword metadata)| 
+|file_size	|8 |	Original uncompressed file size|
+|codeword_map_metadata_size	|4 |	Size of the codeword metadata|
+|codeword_map_metadata	| variable (N bytes)|	Huffman tree codeword mapping for decoding|
+
+
+The `codeword_map_metadata` consists of mapping table information that shows how each character (ASCII code value) is mapped to a specific codeword. Each `(character : codeword)` pair is converted into the format `(character : codeword length : codeword)`. This process is performed in the `ByteTable_make_codewords_map_metadata` function. 
+
+Total size of the header is 20 bytes. 
+(fixed) + codeword_map_metadata_size (variable)
+
+
+**2. Section Divider**
+
+The section divider separates the metadata header from the actual compressed data.
+`0x00 0x00 (fixed)`
+
+
+**3. Compressed Data**
+
+The compressed data contains the Huffman-encoded representation of the original file content. Its size depends on the compression efficiency and the size of the original file.
+
+
+
+
