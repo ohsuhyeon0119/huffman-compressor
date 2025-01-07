@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
  *    - Generates a Huffman tree and assigns codewords to each byte.
  * 
  * 3. **HEADER METADATA CREATION & WRITE**:
- *    - Creates a metadata header that contains file size and frequency table.
+ *    - Creates a metadata header that contains file size and codeword mapping table.
  *    - Writes the header to the output file.
  * 
  * 4. **COMPRESS ORIGINAL DATA & WRITE**:

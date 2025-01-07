@@ -43,11 +43,6 @@ uint8_t Stream_buffer_get(Stream_buffer* sb, size_t byte_index) {
         return sb->buffer[buffer_index];
     } else {
         
-
-        
-        
-
-        
         sb->start_byte_offset = byte_index;
         sb->end_byte_offset = sb->start_byte_offset;
 

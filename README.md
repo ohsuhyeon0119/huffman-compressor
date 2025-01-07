@@ -1,6 +1,8 @@
 # Huffman Compressor
 
-Implementation of file compression and decompression using the Huffman algorithm in C.
+Implementation of file compression and decompression using the Huffman algorithm in C. 
+
+Each byte value (ASCII code) corresponds to a single character and is converted into a variable-length codeword by the Huffman algorithm. The *.huff file is a compressed file format.
 
 
 
@@ -63,7 +65,7 @@ Compress a file using the Huffman coding algorithm.
    - Generates a Huffman tree and assigns codewords to each byte.
 
 3. **Header Metadata Creation & Write**:
-   - Creates a metadata header that contains the file size and frequency table.
+   - Creates a metadata header that contains the file size and codeword mapping table.
    - Writes the header to the output file.
 
 4. **Compress Original Data & Write**:
@@ -134,4 +136,13 @@ The compressed data contains the Huffman-encoded representation of the original 
 
 
 
+## About `Stream_buffer struct`
+In the decompress function, directly loading the entire compressed file into memory can be problematic if the compressed file size is too large. To address this issue, I created a struct called `Stream_buffer`.
 
+The `Stream_buffer` is useful for efficiently loading large compressed files, avoiding memory issues by reading the file in smaller chunks instead of loading it entirely into memory. 
+
+It splits the file into manageable parts, providing seamless byte-by-byte access while maintaining a fixed-size memory footprint.
+
+`On-Demand Loading` - Automatically fetches the required chunk if the requested byte is outside the current buffer range. 
+
+`Seamless Access` - Handles file splitting internally, so users can access data continuously without worrying about chunk boundaries.
